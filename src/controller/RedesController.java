@@ -77,11 +77,12 @@ public class RedesController {
 
             while ((linha = leitor.readLine()) != null) {
                 linha = linha.trim();
+                System.out.println(linha); // 🔹 imprime todas as linhas do ping
 
                 if (!os().contains("Windows") && linha.contains("rtt min/avg/max")) {
                     // Linux/mac
-                    String valores = linha.split("=")[1].trim(); // pega a parte "36.218/45.559/72.231/10.155 ms"
-                    String avg = valores.split("/")[1];          // pega o segundo campo (médio)
+                    String valores = linha.split("=")[1].trim();
+                    String avg = valores.split("/")[1];
                     System.out.println("Tempo médio do ping: " + avg + " ms");
                 } else if (os().contains("Windows") && linha.contains("Média")) {
                     // Windows
@@ -93,6 +94,7 @@ public class RedesController {
                     }
                 }
             }
+
             leitor.close();
 
             int exitCode = processo.waitFor();
@@ -104,3 +106,4 @@ public class RedesController {
     }
 
 }
+
